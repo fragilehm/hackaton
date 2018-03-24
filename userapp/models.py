@@ -40,6 +40,7 @@ class Address(models.Model):
 class History(models.Model):
     user = models.ForeignKey(User, related_name='histories', on_delete=models.CASCADE)
     description = models.TextField()
+    image_url = models.URLField()
     updated = models.DateField(auto_now=True)
 
     class Meta:

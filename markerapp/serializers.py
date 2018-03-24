@@ -30,4 +30,4 @@ class DetailedMarkerSerializer(ModelSerializer):
         model = Marker
         fields = ('id', 'categories', 'description', 'address', 'latitude', 'longitude', 'isNeed',
                   'user_id', 'user_phone', 'user_email', 'user_name', 'user_surname', 'user_description',
-                  'user_image', 'user_connectedTo')
+                  'user_image_url', 'user_connectedTo')

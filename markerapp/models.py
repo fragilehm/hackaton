@@ -33,7 +33,7 @@ class Marker(models.Model):
     user_name = models.CharField(null=True, blank=True, max_length=50)
     user_surname = models.CharField(null=True, blank=True, max_length=50)
     user_description = models.TextField(null=True, blank=True)
-    user_image = models.URLField(null=True, blank=True)
+    user_image_url = models.URLField(null=True, blank=True)
     user_connectedTo = models.TextField(null=True, blank=True)
 
     def __str__(self):

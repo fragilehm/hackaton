@@ -11,7 +11,7 @@ class AddressSerializer(ModelSerializer):
 class HistorySerializer(ModelSerializer):
     class Meta:
         model = History
-        fields = ('description', 'updated')
+        fields = ('description', 'image_url', 'updated')
 
 
 class UserSerializer(ModelSerializer):
