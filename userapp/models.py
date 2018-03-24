@@ -12,7 +12,7 @@ class User(models.Model):
     phone = models.CharField(max_length=40)
     password = models.CharField(max_length=40)
     email = models.EmailField(null=True, blank=True)
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=255, null=False)
     surname = models.CharField(max_length=50, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     image_url = models.URLField(null=True, blank=True)
