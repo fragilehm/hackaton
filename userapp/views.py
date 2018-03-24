@@ -8,12 +8,12 @@ from .models import User
 from .serializers import UserDetailSerializer, UserSerializer
 
 
-class UserList(APIView):
-    """View to list users"""
+class OrganizationList(APIView):
+    """View to list organizations"""
 
     def get(self, request, format=None):
-        """View to list of users"""
-        users = User.objects.all()
+        """View to list of organizations"""
+        users = User.objects.all().filter(type="ORGANIZATION")
         user_serializer = UserSerializer(users, many=True)
         return Response(user_serializer.data, status=status.HTTP_200_OK)
 

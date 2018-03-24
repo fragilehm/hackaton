@@ -26,6 +26,10 @@ class Marker(models.Model):
     latitude = models.CharField(max_length=20)
     longitude = models.CharField(max_length=20)
     isNeed = models.BooleanField()
+    status_type = (("1", "grey"),
+                   ("2", "yellow"),
+                   ("3", "red"))
+    status = models.CharField(max_length=40, choices=status_type, default="1")
 
     user_id = models.IntegerField()
     user_phone = models.CharField(max_length=50)
