@@ -25,8 +25,7 @@ SECRET_KEY = 'fqe-*t2nbc&auj=0f&5fv)sfj!yt&l-72+_az_0@=z%52*^m@^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-'''ALLOWED_HOSTS = ['165.227.49.83', '127.0.0.1']'''
-ALLOWED_HOSTS = ['46.101.146.101', 'localhost']
+ALLOWED_HOSTS = ['46.101.146.101', '127.0.0.1']
 
 # Application definition
 
@@ -138,6 +137,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 from corsheaders.defaults import default_headers
 
