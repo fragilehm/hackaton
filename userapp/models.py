@@ -7,7 +7,7 @@ from django.db import models
 class User(models.Model):
     """Модель юзера"""
     status_type = (("USER", "user"),
-                    ("ORGANIZATION", "organization"))
+                   ("ORGANIZATION", "organization"))
     type = models.CharField(max_length=40, choices=status_type, default="USER")
     phone = models.CharField(max_length=40)
     password = models.CharField(max_length=40)
@@ -29,9 +29,19 @@ class User(models.Model):
 class Address(models.Model):
     user = models.ForeignKey(User, related_name='addresses', on_delete=models.CASCADE)
     address = models.CharField(max_length=150)
-    latitude = models.CharField(max_length=20)
-    longitude = models.CharField(max_length=20)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6)
 
     class Meta:
         verbose_name = "Адрес"
         verbose_name_plural = "Адреса"
+
+
+class History(models.Model):
+    user = models.ForeignKey(User, related_name='histories', on_delete=models.CASCADE)
+    description = models.TextField()
+    updated = models.DateField(auto_now=True)
+
+    class Meta:
+        verbose_name = "История"
+        verbose_name_plural = "Истории"
