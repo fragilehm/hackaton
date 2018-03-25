@@ -27,10 +27,17 @@ class UserDetail(generics.RetrieveAPIView):
         return ob
 
 
-class UserHistoryList(generics.RetrieveAPIView):
-    """View to user histories"""
-    serializer_class = UserHistorySerializer
+class UserHistoryList(APIView):
+    """View to list of histories by user id"""
 
-    def get_object(self):
-        ob = get_object_or_404(History, user=self.kwargs['pk'])
-        return ob
+    def get(self, request, pk, format=None):
+        """Check if user exists"""
+        try:
+            User.objects.get(pk=pk)
+        except User.DoesNotExist:
+            return Response({"error": "Category doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        """If exists then return list of markers by category id"""
+        histories = History.objects.filter(user=pk)
+        histories_serializer = UserHistorySerializer(histories, many=True)
+        result = histories_serializer.data
+        return Response(result, status=status.HTTP_200_OK)
