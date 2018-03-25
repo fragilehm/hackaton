@@ -30,3 +30,7 @@ class UserDetailSerializer(ModelSerializer):
                   'connectedTo', 'histories')
 
 
+class UserHistorySerializer(ModelSerializer):
+    class Meta:
+        model = History
+        fields = ('id', 'user', 'description', 'image_url', 'updated')

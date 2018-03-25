@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from django.shortcuts import get_object_or_404
 
-from .models import User
-from .serializers import UserDetailSerializer, UserSerializer
+from .models import User, History
+from .serializers import UserDetailSerializer, UserSerializer, UserHistorySerializer
 
 
 class OrganizationList(APIView):
@@ -24,4 +24,13 @@ class UserDetail(generics.RetrieveAPIView):
 
     def get_object(self):
         ob = get_object_or_404(User, id=self.kwargs['pk'])
+        return ob
+
+
+class UserHistoryList(generics.RetrieveAPIView):
+    """View to user histories"""
+    serializer_class = UserHistorySerializer
+
+    def get_object(self):
+        ob = get_object_or_404(History, user=self.kwargs['pk'])
         return ob
