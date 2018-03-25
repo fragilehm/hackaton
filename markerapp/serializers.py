@@ -21,7 +21,8 @@ class MarkerSerializer(ModelSerializer):
 
     class Meta:
         model = Marker
-        fields = ('id', 'categories', 'description', 'user_image_url', 'status', 'address', 'latitude', 'longitude')
+        fields = ('id', 'categories', 'description', 'user_image_url', 'status', 'address', 'latitude', 'longitude',
+                  'user_phone')
 
 
 class MarkerWithoutImageSerializer(ModelSerializer):
@@ -29,7 +30,7 @@ class MarkerWithoutImageSerializer(ModelSerializer):
 
     class Meta:
         model = Marker
-        fields = ('id', 'categories', 'description', 'status', 'address', 'latitude', 'longitude')
+        fields = ('id', 'categories', 'description', 'status', 'address', 'latitude', 'longitude', 'user_phone')
 
 
 class DetailedMarkerSerializer(ModelSerializer):
