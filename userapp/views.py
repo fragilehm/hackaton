@@ -35,8 +35,8 @@ class UserHistoryList(APIView):
         try:
             User.objects.get(pk=pk)
         except User.DoesNotExist:
-            return Response({"error": "Category doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
-        """If exists then return list of markers by category id"""
+            return Response({"error": "User doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        """If exists then return list of histories by user id"""
         histories = History.objects.filter(user=pk)
         histories_serializer = UserHistorySerializer(histories, many=True)
         result = histories_serializer.data
