@@ -40,3 +40,12 @@ class DetailedMarkerSerializer(ModelSerializer):
         fields = ('id', 'categories', 'description', 'address', 'latitude', 'longitude', 'isNeed', 'status',
                   'user_id', 'user_phone', 'user_email', 'user_name', 'user_surname', 'user_description',
                   'user_image_url', 'user_connectedTo')
+
+
+class PostMarkerSerializer(ModelSerializer):
+
+    class Meta:
+        model = Marker
+        fields = ('id', 'categories', 'description', 'address', 'latitude', 'longitude', 'isNeed', 'status',
+                  'user_id', 'user_phone', 'user_email', 'user_name', 'user_surname', 'user_description',
+                  'user_image_url', 'user_connectedTo')

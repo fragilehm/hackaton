@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
 from .views import CategoryList, MarkerListByCategoryID, MarkerDetail, NeedMarkerListByCategoryID, \
-    WantMarkerListByCategoryID
+    WantMarkerListByCategoryID, MarkerList
 
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     url(r'^need/categories/(?P<pk>[0-9]+)/$', NeedMarkerListByCategoryID.as_view(), name='need-marker-list-by-category-id'),
     url(r'^want/categories/(?P<pk>[0-9]+)/$', WantMarkerListByCategoryID.as_view(), name='want-marker-list-by-category-id'),
     # url(r'categories/(?P<pk>[0-9]+)/$', MarkerListBySeveralCategoryID.as_view(), name='marker-list-by-several-category-id'),
-    url(r'markers/(?P<pk>[0-9]+)/$', MarkerDetail.as_view(), name='marker-detail')
+    url(r'^markers/(?P<pk>[0-9]+)/$', MarkerDetail.as_view(), name='marker-detail'),
+    url(r'^markers/$', MarkerList.as_view(), name='marker-list')
 
 ]
