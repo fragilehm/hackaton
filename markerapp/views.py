@@ -5,7 +5,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404
 
 from .models import Category, Marker
-from .serializers import CategorySerializer, MarkerSerializer, DetailedMarkerSerializer
+from .serializers import CategorySerializer, MarkerSerializer, DetailedMarkerSerializer, MarkerWithoutImageSerializer
 
 
 class CategoryList(APIView):
@@ -26,9 +26,51 @@ class MarkerListByCategoryID(APIView):
         except Category.DoesNotExist:
             return Response({"error": "Category doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
         """If exists then return list of markers by category id"""
-        markers = Marker.objects.filter(categories=pk)
-        markers_serializer = MarkerSerializer(markers, many=True)
-        result = markers_serializer.data
+        markers1 = Marker.objects.filter(categories=pk, user_image_url__isnull=False)
+        markers_serializer1 = MarkerSerializer(markers1, many=True)
+
+        markers2 = Marker.objects.filter(categories=pk, user_image_url__isnull=True)
+        markers_serializer2 = MarkerWithoutImageSerializer(markers2, many=True)
+
+        result = markers_serializer1.data + markers_serializer2.data
+        return Response(result, status=status.HTTP_200_OK)
+
+
+class NeedMarkerListByCategoryID(APIView):
+    """View to list of actions by category id"""
+    def get(self, request, pk, format=None):
+        """Check if category exists"""
+        try:
+            Category.objects.get(pk=pk)
+        except Category.DoesNotExist:
+            return Response({"error": "Category doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        """If exists then return list of markers by category id"""
+        markers1 = Marker.objects.filter(categories=pk, user_image_url__isnull=False, isNeed=True)
+        markers_serializer1 = MarkerSerializer(markers1, many=True)
+
+        markers2 = Marker.objects.filter(categories=pk, user_image_url__isnull=True, isNeed=True)
+        markers_serializer2 = MarkerWithoutImageSerializer(markers2, many=True)
+
+        result = markers_serializer1.data + markers_serializer2.data
+        return Response(result, status=status.HTTP_200_OK)
+
+
+class WantMarkerListByCategoryID(APIView):
+    """View to list of actions by category id"""
+    def get(self, request, pk, format=None):
+        """Check if category exists"""
+        try:
+            Category.objects.get(pk=pk)
+        except Category.DoesNotExist:
+            return Response({"error": "Category doesn't exist"}, status=status.HTTP_404_NOT_FOUND)
+        """If exists then return list of markers by category id"""
+        markers1 = Marker.objects.filter(categories=pk, user_image_url__isnull=False, isNeed=False)
+        markers_serializer1 = MarkerSerializer(markers1, many=True)
+
+        markers2 = Marker.objects.filter(categories=pk, user_image_url__isnull=True, isNeed=False)
+        markers_serializer2 = MarkerWithoutImageSerializer(markers2, many=True)
+
+        result = markers_serializer1.data + markers_serializer2.data
         return Response(result, status=status.HTTP_200_OK)
 
 
